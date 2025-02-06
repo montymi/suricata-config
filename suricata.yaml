@@ -1,0 +1,36 @@
+%YAML 1.1
+---
+
+vars:
+  # Networks for the HOME_NET variable
+  HOME-NET: "[192.168.1.0/24, 10.0.0.0/8]"
+  EXTERNAL-NET: "any"
+
+runmodes:
+  - id-mode: yes
+
+# Ensure you specify the correct interface here
+af-packet:
+  - interface: en0  # change to your correct interface
+
+logging:
+  default-log-level: info
+  outputs:
+    - file:
+        enabled: yes
+        filename: /var/log/suricata/suricata.log
+        level: info
+    - file:
+        enabled: yes
+        filename: /var/log/suricata/alerts.log
+        level: warning  # Alerts at a higher level, logs only significant events
+
+
+stats:
+  enabled: yes
+  filename: /var/log/suricata/stats.json
+  level: info
+
+rule-files:
+  - /etc/suricata/rules/*.rules
+
